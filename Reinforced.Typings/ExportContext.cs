@@ -25,6 +25,7 @@ namespace Reinforced.Typings
         private string _targetDirectory;
         private string _targetFile;
         private bool _writeWarningComment;
+        private bool _disableTsModuleGeneration;
 
 
         /// <summary>
@@ -178,6 +179,19 @@ namespace Reinforced.Typings
             {
                 if (_isLocked) return;
                 _documentationFilePath = value;
+            }
+        }
+
+        /// <summary>
+        /// Disable generation of ts module syntax
+        /// </summary>
+        public bool DisableTsModuleGeneration
+        {
+            get { return _disableTsModuleGeneration; }
+            set
+            {
+                if (_isLocked) return;
+                _disableTsModuleGeneration = value;
             }
         }
 

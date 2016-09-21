@@ -11,9 +11,11 @@ namespace Reinforced.Typings.Visitors
     class TypeScriptExportVisitor : TextExportingVisitor
     {
         protected WriterContext Context { get; set; }
+        public List<string> AdditionalImports { get; set; } = new List<string>();
+        protected string currentModuleName = string.Empty;
 
-        public TypeScriptExportVisitor(TextWriter writer)
-            : base(writer)
+        public TypeScriptExportVisitor(TextWriter writer, ExportContext exportContext)
+            : base(writer, exportContext)
         {
             Context = WriterContext.None;
         }
@@ -76,6 +78,23 @@ namespace Reinforced.Typings.Visitors
             if (Context != WriterContext.Interface) Modifiers(node);
             Visit(node.Identifier);
             Write(": ");
+            if (ExportContext.DisableTsModuleGeneration)
+            {
+                var type = node.Type as RtSimpleTypeName;
+                if (type != null)
+                {
+                    string ns = type.Namespace;
+                    if (!string.IsNullOrWhiteSpace(currentModuleName) && !string.IsNullOrWhiteSpace(ns))
+                    {
+                        var importSource = string.Join("/", currentModuleName.Split('.').Select(x => ".."))
+                                            + "/"
+                                            + ns.Replace(".", "/")
+                                            + "/"
+                                            + type.TypeName;
+                        AdditionalImports.Add($"import {{{type.TypeName}}} from \"{importSource}\";");
+                    }
+                }
+            }
             Visit(node.Type);
             if (!string.IsNullOrEmpty(node.InitializationExpression))
             {
@@ -93,7 +112,7 @@ namespace Reinforced.Typings.Visitors
             var prev = Context;
             Context = WriterContext.Interface;
             AppendTabs();
-            if (prev == WriterContext.Module) Write("export ");
+            if (prev == WriterContext.Module || ExportContext.DisableTsModuleGeneration) Write("export ");
             Write("interface ");
             Visit(node.Name);
             if (node.Implementees.Count > 0)
@@ -202,7 +221,14 @@ namespace Reinforced.Typings.Visitors
             var prev = Context;
             Context = WriterContext.Class;
             AppendTabs();
-            if (prev == WriterContext.Module) Write("export ");
+            if (!string.IsNullOrWhiteSpace(node.AngularDecorator))
+            {
+                WriteLine(node.AngularDecorator);
+            }
+            if (prev == WriterContext.Module || ExportContext.DisableTsModuleGeneration)
+            {
+                Write("export ");
+            }
             Write("class ");
             Visit(node.Name);
             if (node.Extendee != null)
@@ -271,7 +297,8 @@ namespace Reinforced.Typings.Visitors
         {
             if (node == null) return;
 
-            if (!node.IsAbstractModule)
+            currentModuleName = node.ModuleName;
+            if (!node.IsAbstractModule && !ExportContext.DisableTsModuleGeneration)
             {
                 Context = WriterContext.Module;
                 AppendTabs();
@@ -282,7 +309,7 @@ namespace Reinforced.Typings.Visitors
             {
                 Visit(rtCompilationUnit);
             }
-            if (!node.IsAbstractModule)
+            if (!node.IsAbstractModule && !ExportContext.DisableTsModuleGeneration)
             {
                 Context = WriterContext.None;
                 UnTab();
@@ -349,7 +376,7 @@ namespace Reinforced.Typings.Visitors
 
         public override void Visit(RtSimpleTypeName node)
         {
-            if (!string.IsNullOrEmpty(node.Namespace))
+            if (!string.IsNullOrEmpty(node.Namespace) && !ExportContext.DisableTsModuleGeneration)
             {
                 Write(node.Namespace);
                 Write(".");

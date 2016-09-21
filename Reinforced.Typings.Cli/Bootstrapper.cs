@@ -112,7 +112,8 @@ namespace Reinforced.Typings.Cli
                 CamelCaseForMethods = _parameters.CamelCaseForMethods,
                 CamelCaseForProperties = _parameters.CamelCaseForProperties,
                 DocumentationFilePath = _parameters.DocumentationFilePath,
-                GenerateDocumentation = _parameters.GenerateDocumentation
+                GenerateDocumentation = _parameters.GenerateDocumentation,
+                DisableTsModuleGeneration = _parameters.DisableTsModuleGeneration
             };
             return context;
         }

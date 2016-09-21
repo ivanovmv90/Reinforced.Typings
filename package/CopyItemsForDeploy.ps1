@@ -1,0 +1,13 @@
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.dll .\build\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.dll .\lib\net45\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.dll .\tools\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.xml .\build\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.xml .\lib\net45\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.xml .\tools\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.dll .\build\
+Copy-Item ..\Reinforced.Typings\bin\Release\Reinforced.Typings.dll .\lib\net45\
+Copy-Item ..\Reinforced.Typings.Cli\bin\Release\rtcli.exe .\tools\
+Copy-Item ..\Reinforced.Typings.Cli\bin\Release\rtcli.exe.config .\tools\
+Copy-Item ..\Reinforced.Typings.Cli\bin\Release\rtcli.exe .\build\
+Copy-Item ..\Reinforced.Typings.Cli\bin\Release\rtcli.exe.config .\build\
+Copy-Item ..\Reinforced.Typings.Integrate\bin\Release\Reinforced.Typings.Integrate.dll .\build\

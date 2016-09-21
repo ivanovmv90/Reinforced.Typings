@@ -97,7 +97,12 @@ namespace Reinforced.Typings.Integrate
         /// Full-qualified name of fluent configuration method
         /// </summary>
         public string ConfigurationMethod { get; set; }
-        
+
+        /// <summary>
+        /// Disable generation of typescript module declarations
+        /// </summary>
+        public bool DisableTsModuleGeneration { get; set; }
+
         protected override string GenerateFullPathToTool()
         {
             return RtCliPath;
@@ -124,7 +129,8 @@ namespace Reinforced.Typings.Integrate
                 CamelCaseForMethods = CamelCaseForMethods,
                 DocumentationFilePath = DocumentationFilePath.EndsWith(".xml",StringComparison.InvariantCultureIgnoreCase)?DocumentationFilePath:String.Empty,
                 GenerateDocumentation = GenerateDocumentation,
-                ConfigurationMethod = ConfigurationMethod
+                ConfigurationMethod = ConfigurationMethod,
+                DisableTsModuleGeneration = DisableTsModuleGeneration
             };
 
             return consoleParams.ExportConsoleParameters();

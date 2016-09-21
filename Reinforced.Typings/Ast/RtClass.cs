@@ -33,6 +33,11 @@ namespace Reinforced.Typings.Ast
         public List<RtNode> Members { get; private set; }
 
         /// <summary>
+        /// Angular decorator for class
+        /// </summary>
+        public string AngularDecorator { get; set; }
+
+        /// <summary>
         /// Constructs new instance of AST node
         /// </summary>
         public RtClass()

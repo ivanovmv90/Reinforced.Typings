@@ -109,7 +109,12 @@
 			Disables Reinforced.Typings generation on build. Use it when it is necessary to temporary disable 
 			typings generation.
 		-->
-		<RtDisable>false</RtDisable>		
+		<RtDisable>false</RtDisable>	
+
+		<!--
+			Disable module syntax generation.
+		-->
+		<RtDisableTsModuleGeneration>false</RtDisableTsModuleGeneration>	
 		
 	</PropertyGroup>
 	

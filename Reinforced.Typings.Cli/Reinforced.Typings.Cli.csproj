@@ -11,6 +11,8 @@
     <AssemblyName>rtcli</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,11 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Reinforced.Typings\Reinforced.Typings.csproj">
-      <Project>{2a5ccd5c-e660-4088-8937-9632abbbcdbb}</Project>
+      <Project>{2A5CCD5C-E660-4088-8937-9632ABBBCDBB}</Project>
       <Name>Reinforced.Typings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

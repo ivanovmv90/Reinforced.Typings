@@ -68,6 +68,7 @@
 			DocumentationFilePath="$(MSBuildProjectDirectory)\$(DocumentationFile)"
 			GenerateDocumentation="$(RtGenerateDocumentation)"
 			ConfigurationMethod="$(RtConfigurationMethod)"
+			DisableTsModuleGeneration="$(RtDisableTsModuleGeneration)"
 		/>
 		
 		<MSBuild Projects="$(MSBuildProjectFullPath)" Properties="INeedThis=JustToRebuildTypescripts;BuildingProject=true" Targets="CompileTypeScript" Condition="'$(TypeScriptTarget)' != ''" />

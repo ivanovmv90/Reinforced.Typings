@@ -10,8 +10,8 @@ namespace Reinforced.Typings.Visitors
 {
     class TypingsExportVisitor : TypeScriptExportVisitor
     {
-        public TypingsExportVisitor(TextWriter writer)
-            : base(writer)
+        public TypingsExportVisitor(TextWriter writer, ExportContext exportContext)
+            : base(writer, exportContext)
         {
         }
 
@@ -37,7 +37,7 @@ namespace Reinforced.Typings.Visitors
         {
             if (node == null) return;
 
-            if (!node.IsAbstractModule)
+            if (!node.IsAbstractModule && !ExportContext.DisableTsModuleGeneration)
             {
                 Context = WriterContext.Module;
                 AppendTabs();
@@ -48,7 +48,7 @@ namespace Reinforced.Typings.Visitors
             {
                 Visit(rtCompilationUnit);
             }
-            if (!node.IsAbstractModule)
+            if (!node.IsAbstractModule && !ExportContext.DisableTsModuleGeneration)
             {
                 Context = WriterContext.None;
                 UnTab();

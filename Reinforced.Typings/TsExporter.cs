@@ -24,6 +24,7 @@ namespace Reinforced.Typings
         private HashSet<Type> _allTypesHash;
         private ConfigurationRepository _configurationRepository;
         private bool _isAnalyzed;
+        private List<string> _additionalImports = new List<string>();
 
         #region Constructors
 
@@ -144,6 +145,10 @@ namespace Reinforced.Typings
                         ExportTypes(tw, tr);
                     }
                 }
+                if (_additionalImports.Any())
+                {
+                    AppendAdditionalImports(file);
+                }
             }
             else
             {
@@ -162,12 +167,52 @@ namespace Reinforced.Typings
                             ExportTypes(tw, tr, kv.Value);
                         }
                     }
+                    if (_additionalImports.Any())
+                    {
+                        AppendAdditionalImports(tmpFile);
+                    }
                 }
             }
 
             _context.Unlock();
             _fileOps.DeployTempFiles();
             tr.PrintCacheInfo();
+        }
+
+        private void AppendAdditionalImports(string file)
+        {
+            var sb = new StringBuilder();
+            using (var f = File.OpenRead(file))
+            {
+                using (var sr = new StreamReader(f))
+                {
+                    string line = sr.ReadLine();
+                    while (line != null && !line.StartsWith("export"))
+                    {
+                        sb.AppendLine(line);
+                        line = sr.ReadLine();
+                    }
+                    if (sr.EndOfStream)
+                    {
+                        return;
+                    }
+                    foreach (var import in _additionalImports)
+                    {
+                        sb.AppendLine(import);
+                    }
+                    sb.AppendLine()
+                        .AppendLine(line)
+                        .AppendLine(sr.ReadToEnd());
+                }
+            }
+            using (var f = File.OpenWrite(file))
+            {
+                using (var sw = new StreamWriter(f))
+                {
+                    sw.Write(sb.ToString());
+                }
+            }
+            _additionalImports.Clear();
         }
 
         private void ExportNamespaces(IEnumerable<Type> types, TypeResolver tr, TextWriter tw)
@@ -177,7 +222,7 @@ namespace Reinforced.Typings
             var nsp = grp.Where(g => !string.IsNullOrEmpty(g.Key)) // avoid anonymous types
                 .ToDictionary(k => k.Key, v => v.ToList());
 
-            var visitor = _context.ExportPureTypings ? new TypingsExportVisitor(tw) : new TypeScriptExportVisitor(tw);
+            var visitor = _context.ExportPureTypings ? new TypingsExportVisitor(tw, _context) : new TypeScriptExportVisitor(tw, _context);
 
             foreach (var n in nsp)
             {
@@ -185,6 +230,7 @@ namespace Reinforced.Typings
                 if (ns == "-") ns = string.Empty;
                 var module = gen.Generate(n.Value, ns, tr);
                 visitor.Visit(module);
+                _additionalImports = visitor.AdditionalImports;
             }
             tw.Flush();
         }

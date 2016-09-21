@@ -153,6 +153,8 @@ ConfigurationBuilder as first parameter.
 Example:   rtcli.exe ConfigurationMethod=""My.Assembly.Name.Configuration.ConfigureTypings"" ")]
         public string ConfigurationMethod { get; set; }
 
+        public bool DisableTsModuleGeneration { get; set; }
+
         /// <summary>
         /// Validates input parameters
         /// </summary>

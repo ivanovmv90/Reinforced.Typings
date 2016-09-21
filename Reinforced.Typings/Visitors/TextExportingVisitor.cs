@@ -16,9 +16,12 @@ namespace Reinforced.Typings.Visitors
 
         protected TextWriter Writer { get { return _writer; } }
 
-        public TextExportingVisitor(TextWriter writer)
+        protected ExportContext ExportContext { get; private set; }
+
+        public TextExportingVisitor(TextWriter writer, ExportContext exportContext)
         {
             _writer = writer;
+            ExportContext = exportContext;
         }
 
         protected void Tab()

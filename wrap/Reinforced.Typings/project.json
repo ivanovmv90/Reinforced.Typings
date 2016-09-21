@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Reinforced.Typings/Reinforced.Typings.csproj",
+      "bin": {
+        "assembly": "../../Reinforced.Typings/obj/{configuration}/Reinforced.Typings.dll",
+        "pdb": "../../Reinforced.Typings/obj/{configuration}/Reinforced.Typings.pdb"
+      }
+    }
+  }
+}

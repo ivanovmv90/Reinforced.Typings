@@ -43,7 +43,9 @@ namespace Reinforced.Typings.Test.RT.Angular
                         + "/" 
                         + retTypeSimple.TypeName;
                     Context.Location.CurrentModule.CompilationUnits.Add(new RtRaw($"import {{{retTypeSimple.TypeName}}} from \"{importSource}\";"));
-                    genericReturnType = new RtSimpleTypeName(retTypeSimple.TypeName);
+                    var rtSimpleTypeName = new RtSimpleTypeName(retTypeSimple.TypeName);
+                    rtSimpleTypeName.Namespace = string.Empty;
+                    genericReturnType = rtSimpleTypeName;
                 }
             }
 

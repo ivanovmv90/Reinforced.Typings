@@ -4,13 +4,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Reinforced.Typings.Test.Models;
+using Reinforced.Typings.Test.RT.Angular;
 
 namespace Reinforced.Typings.Test.Controllers
 {
     [Authorize]
+    [AngularController]
     public class ValuesController : ApiController
     {
         // GET api/values
+        [AngularMethod(typeof(Dummy))]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

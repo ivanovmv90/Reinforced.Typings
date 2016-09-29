@@ -3,11 +3,7 @@
 //     the code is regenerated.
 
 
-/// <reference path="TestModel.ts"/>
-import {TestModel} from "../../../../Reinforced/Typings/Test/Models/TestModel";
-
-export class Dummy
-{
-	public Test: TestModel;
+export enum TestEnum { 
+	Value1 = 0, 
+	Valeu2 = 1, 
 }
-

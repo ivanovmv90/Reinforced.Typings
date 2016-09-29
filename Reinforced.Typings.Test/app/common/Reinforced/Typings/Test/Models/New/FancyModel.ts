@@ -5,8 +5,8 @@
 
 /// <reference path="../Dummy.ts"/>
 import {Dummy} from "../../../../../Reinforced/Typings/Test/Models/Dummy";
-export class FancyModel
 
+export class FancyModel
 {
 	public One: number;
 	public Two: string;

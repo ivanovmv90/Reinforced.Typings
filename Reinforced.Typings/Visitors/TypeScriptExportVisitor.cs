@@ -68,6 +68,17 @@ namespace Reinforced.Typings.Visitors
                 DocLine(summaryLine);
             }
         }
+
+        private void CreateAdditionalImport(RtSimpleTypeName type)
+        {
+            var ns = type.Namespace;
+            var importSource = string.Join("/", currentModuleName.Split('.').Select(x => ".."))
+                               + "/"
+                               + ns.Replace(".", "/")
+                               + "/"
+                               + type.TypeName;
+            AdditionalImports.Add($"import {{{type.TypeName}}} from \"{importSource}\";");
+        }
         #endregion
 
         public override void Visit(RtField node)
@@ -86,12 +97,7 @@ namespace Reinforced.Typings.Visitors
                     string ns = type.Namespace;
                     if (!string.IsNullOrWhiteSpace(currentModuleName) && !string.IsNullOrWhiteSpace(ns))
                     {
-                        var importSource = string.Join("/", currentModuleName.Split('.').Select(x => ".."))
-                                            + "/"
-                                            + ns.Replace(".", "/")
-                                            + "/"
-                                            + type.TypeName;
-                        AdditionalImports.Add($"import {{{type.TypeName}}} from \"{importSource}\";");
+                        CreateAdditionalImport(type);
                     }
                 }
             }
@@ -119,6 +125,10 @@ namespace Reinforced.Typings.Visitors
             {
                 Write(" extends ");
                 SequentialVisit(node.Implementees, ", ");
+                foreach (var type in node.Implementees)
+                {
+                    CreateAdditionalImport(type);
+                }
             }
             Br(); AppendTabs();
             Write("{"); Br();
@@ -235,6 +245,7 @@ namespace Reinforced.Typings.Visitors
             {
                 Write(" extends ");
                 Visit(node.Extendee);
+                CreateAdditionalImport(node.Extendee as RtSimpleTypeName);
             }
             if (node.Implementees.Count > 0)
             {
@@ -338,7 +349,7 @@ namespace Reinforced.Typings.Visitors
             var prev = Context;
             Context = WriterContext.Interface;
             AppendTabs();
-            if (prev == WriterContext.Module) Write("export ");
+            if (prev == WriterContext.Module || ExportContext.DisableTsModuleGeneration) Write("export ");
             Write("enum ");
             Visit(node.EnumName);
             WriteLine(" { ");
@@ -399,7 +410,7 @@ namespace Reinforced.Typings.Visitors
         public override void Visit(RtArrayType node)
         {
             if (node == null) return;
-            Visit(node.ElementType); Write("[]");
+            Visit(node.ElementType as RtSimpleTypeName); Write("[]");
         }
         #endregion
 

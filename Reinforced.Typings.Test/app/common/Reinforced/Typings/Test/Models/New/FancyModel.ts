@@ -3,14 +3,13 @@
 //     the code is regenerated.
 
 
-/// <reference path="../Dummy.ts"/>
 import {Dummy} from "../../../../../Reinforced/Typings/Test/Models/Dummy";
 
 export class FancyModel
 {
 	public One: number;
-	public Two: string;
+	public Two: string[];
 	public Zero: boolean;
-	public Dummy: Dummy;
+	public Dummy: Dummy[];
 }
 

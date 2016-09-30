@@ -10,8 +10,8 @@ namespace Reinforced.Typings.Test.Models.New
     public class FancyModel
     {
         public int One { get; set; }
-        public string Two { get; set; }
+        public List<string> Two { get; set; }
         public bool Zero { get; set; }
-        public Dummy Dummy { get; set; }
+        public Dummy[] Dummy { get; set; }
     }
 }

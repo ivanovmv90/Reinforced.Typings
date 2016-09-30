@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Reinforced.Typings.Test.Models;
+using Reinforced.Typings.Test.Models.New;
 using Reinforced.Typings.Test.RT.Angular;
 
 namespace Reinforced.Typings.Test.Controllers
@@ -21,6 +22,7 @@ namespace Reinforced.Typings.Test.Controllers
         }
 
         // GET api/values/5
+        [AngularMethod(typeof(FancyModel[]))]
         public string Get(int id)
         {
             return "value";

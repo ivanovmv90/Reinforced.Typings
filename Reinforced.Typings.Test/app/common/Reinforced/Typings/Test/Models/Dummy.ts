@@ -5,6 +5,7 @@
 
 /// <reference path="TestModel.ts"/>
 import {TestModel} from "../../../../Reinforced/Typings/Test/Models/TestModel";
+import {TestModel} from "../../../../Reinforced/Typings/Test/Models/TestModel";
 
 export class Dummy
 {

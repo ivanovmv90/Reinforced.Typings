@@ -392,6 +392,10 @@ namespace Reinforced.Typings.Visitors
                 Write(node.Namespace);
                 Write(".");
             }
+            if (!string.IsNullOrEmpty(node.Namespace))
+            {
+                CreateAdditionalImport(node);
+            }
             Write(node.TypeName);
             if (node.GenericArguments.Length > 0)
             {
@@ -410,7 +414,7 @@ namespace Reinforced.Typings.Visitors
         public override void Visit(RtArrayType node)
         {
             if (node == null) return;
-            Visit(node.ElementType as RtSimpleTypeName); Write("[]");
+            Visit(node.ElementType); Write("[]");
         }
         #endregion
 

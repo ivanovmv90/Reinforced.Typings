@@ -5,6 +5,7 @@
 
 /// <reference path="../Models/Dummy.ts"/>
 import {Dummy} from "../../../../Reinforced/Typings/Test/Models/Dummy";
+import {FancyModel} from "../../../../Reinforced/Typings/Test/Models/New/FancyModel";
 import {A, B} from "test";
 
 @Injectable()
@@ -16,6 +17,13 @@ export class ValuesController
 		var params = {  };
 		return this.http.post('/Values/Get', params)
 		    .map((r: Response) => r.json().data) as Observable<Dummy>;
+		
+	}
+	public Get(id: number) : Observable<FancyModel[]>
+	{
+		var params = { 'id': id };
+		return this.http.post('/Values/Get', params)
+		    .map((r: Response) => r.json().data) as Observable<FancyModel[]>;
 		
 	}
 }

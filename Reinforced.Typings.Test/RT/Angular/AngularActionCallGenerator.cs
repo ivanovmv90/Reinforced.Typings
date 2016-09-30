@@ -29,10 +29,11 @@ namespace Reinforced.Typings.Test.RT.Angular
             if (isVoid) retType = resolver.ResolveTypeName(typeof(object));
 
             var genericReturnType = retType;
-
-            if (retType is RtSimpleTypeName)
+            var isArrayType = retType is RtArrayType;
+            if (retType is RtSimpleTypeName || isArrayType)
             {
-                var retTypeSimple = (retType as RtSimpleTypeName);
+                //TODO: if array of other than RtSimpleType
+                var retTypeSimple = isArrayType? (retType as RtArrayType).ElementType as RtSimpleTypeName : retType as RtSimpleTypeName;
                 string ns = retTypeSimple.Namespace;
                 if (!string.IsNullOrWhiteSpace(ns))
                 {
@@ -45,7 +46,7 @@ namespace Reinforced.Typings.Test.RT.Angular
                     Context.Location.CurrentModule.CompilationUnits.Add(new RtRaw($"import {{{retTypeSimple.TypeName}}} from \"{importSource}\";"));
                     var rtSimpleTypeName = new RtSimpleTypeName(retTypeSimple.TypeName);
                     rtSimpleTypeName.Namespace = string.Empty;
-                    genericReturnType = rtSimpleTypeName;
+                    genericReturnType = isArrayType ? new RtArrayType(rtSimpleTypeName) as RtTypeName : rtSimpleTypeName;
                 }
             }
 

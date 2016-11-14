@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Reinforced.Typings.Angular2</id>
-        <version>0.0.40</version>
+        <version>0.0.44</version>
         <title>Reinforced.Typings.Angular2</title>
         <authors>Pavel B. Novikov, Ivanov Maxim</authors>
         <owners>Pavel B. Novikov</owners>
         <projectUrl>https://github.com/ivanovmv90/Reinforced.Typings</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/reinforced/Reinforced.Typings/master/icon.png</iconUrl>
+        <iconUrl>https://material-design.storage.googleapis.com/publish/material_v_9/0Bx4BSt6jniD7blViQzF0azNqZU0/style_icons_system_intro_principles_consistent.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Fork of Reinforced.Typings project. Added options angular2-friendly code generation. 
             Original project link: https://github.com/reinforced/Reinforced.Typings

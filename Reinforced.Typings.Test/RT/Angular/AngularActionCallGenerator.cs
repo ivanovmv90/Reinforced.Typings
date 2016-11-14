@@ -43,7 +43,7 @@ namespace Reinforced.Typings.Test.RT.Angular
                         + ns.Replace(".", "/") 
                         + "/" 
                         + retTypeSimple.TypeName;
-                    Context.Location.CurrentModule.CompilationUnits.Add(new RtRaw($"import {{{retTypeSimple.TypeName}}} from \"{importSource}\";"));
+                    Context.AdditionalImports.Add($"import {{{retTypeSimple.TypeName}}} from \"{importSource}\";");
                     var rtSimpleTypeName = new RtSimpleTypeName(retTypeSimple.TypeName);
                     rtSimpleTypeName.Namespace = string.Empty;
                     genericReturnType = isArrayType ? new RtArrayType(rtSimpleTypeName) as RtTypeName : rtSimpleTypeName;

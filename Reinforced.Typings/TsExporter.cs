@@ -187,7 +187,7 @@ namespace Reinforced.Typings
                 using (var sr = new StreamReader(f))
                 {
                     string line = sr.ReadLine();
-                    while (line != null && !line.StartsWith("export"))
+                    while (line != null && !line.StartsWith("export") && !line.StartsWith("@"))
                     {
                         sb.AppendLine(line);
                         line = sr.ReadLine();
@@ -196,7 +196,7 @@ namespace Reinforced.Typings
                     {
                         return;
                     }
-                    foreach (var import in _additionalImports)
+                    foreach (var import in _additionalImports.Distinct())
                     {
                         sb.AppendLine(import);
                     }
@@ -230,7 +230,7 @@ namespace Reinforced.Typings
                 if (ns == "-") ns = string.Empty;
                 var module = gen.Generate(n.Value, ns, tr);
                 visitor.Visit(module);
-                _additionalImports = visitor.AdditionalImports;
+                _additionalImports = visitor.GetAdditionalImports();
             }
             tw.Flush();
         }

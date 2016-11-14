@@ -6,10 +6,11 @@
 /// <reference path="../Models/TestModel.ts"/>
 /// <reference path="../Models/Dummy.ts"/>
 /// <reference path="../Models/New/FancyModel.ts"/>
+import {A, B} from "test";
+
 import {TestModel} from "../../../../Reinforced/Typings/Test/Models/TestModel";
 import {Dummy} from "../../../../Reinforced/Typings/Test/Models/Dummy";
 import {FancyModel} from "../../../../Reinforced/Typings/Test/Models/New/FancyModel";
-import {A, B} from "test";
 
 @Injectable()
 export class HomeController
@@ -44,3 +45,4 @@ export class HomeController
 		
 	}
 }
+

@@ -221,6 +221,8 @@ namespace Reinforced.Typings
             }
         }
 
+        public List<string> AdditionalImports { get; set; } = new List<string>();
+
         internal string References { get; set; }
 
         /// <summary>

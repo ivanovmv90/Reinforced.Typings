@@ -5,7 +5,6 @@
 
 /// <reference path="FancyModel.ts"/>
 import {FancyModel} from "../../../../../Reinforced/Typings/Test/Models/New/FancyModel";
-import {FancyModel} from "../../../../../Reinforced/Typings/Test/Models/New/FancyModel";
 
 export class ExtendedFancyModel extends FancyModel
 {

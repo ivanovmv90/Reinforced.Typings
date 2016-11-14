@@ -4,9 +4,10 @@
 
 
 /// <reference path="../Models/Dummy.ts"/>
+import {A, B} from "test";
+
 import {Dummy} from "../../../../Reinforced/Typings/Test/Models/Dummy";
 import {FancyModel} from "../../../../Reinforced/Typings/Test/Models/New/FancyModel";
-import {A, B} from "test";
 
 @Injectable()
 export class ValuesController
@@ -27,3 +28,4 @@ export class ValuesController
 		
 	}
 }
+

@@ -71,6 +71,6 @@
 			DisableTsModuleGeneration="$(RtDisableTsModuleGeneration)"
 		/>
 		
-		<MSBuild Projects="$(MSBuildProjectFullPath)" Properties="INeedThis=JustToRebuildTypescripts;BuildingProject=true" Targets="CompileTypeScript" Condition="'$(TypeScriptTarget)' != ''" />
+		<MSBuild Projects="$(MSBuildProjectFullPath)" Properties="INeedThis=JustToRebuildTypescripts;BuildingProject=true" Targets="CompileTypeScriptWithTSConfig" Condition="'$(TypeScriptTarget)' != ''" />
 	</Target>
 </Project>

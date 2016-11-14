@@ -24,6 +24,11 @@ namespace Reinforced.Typings.Visitors
             ExportContext = exportContext;
         }
 
+        public List<string> GetAdditionalImports()
+        {
+            return ExportContext.AdditionalImports;
+        }
+
         protected void Tab()
         {
             _tabsCount++;
@@ -77,6 +82,7 @@ namespace Reinforced.Typings.Visitors
         {
             _writer.Write(text);
         }
+
         protected void WriteLine(string text)
         {
             _writer.WriteLine(text);

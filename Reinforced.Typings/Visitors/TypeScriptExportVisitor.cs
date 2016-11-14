@@ -11,7 +11,7 @@ namespace Reinforced.Typings.Visitors
     class TypeScriptExportVisitor : TextExportingVisitor
     {
         protected WriterContext Context { get; set; }
-        public List<string> AdditionalImports { get; set; } = new List<string>();
+        //public List<string> AdditionalImports { get; set; } = new List<string>();
         protected string currentModuleName = string.Empty;
 
         public TypeScriptExportVisitor(TextWriter writer, ExportContext exportContext)
@@ -77,7 +77,7 @@ namespace Reinforced.Typings.Visitors
                                + ns.Replace(".", "/")
                                + "/"
                                + type.TypeName;
-            AdditionalImports.Add($"import {{{type.TypeName}}} from \"{importSource}\";");
+            ExportContext.AdditionalImports.Add($"import {{{type.TypeName}}} from \"{importSource}\";");
         }
         #endregion
 
